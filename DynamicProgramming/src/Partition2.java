@@ -8,8 +8,6 @@ public class Partition2 {
             totalSum += arr;
         }
 
-        int k = totalSum;
-
         boolean[] prev = new boolean[totalSum+1];
 
         prev[0] = true;

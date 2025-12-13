@@ -2,56 +2,55 @@ import java.util.*;
 
 public class WildCardMatching {
 
-    public static boolean isAllStars(String s, int i){
+    // Checks if pattern[0..i] contains only '*'
+    public static boolean isAllStars(String p, int i) {
         for (int j = 0; j <= i; j++) {
-            if (s.charAt(j)!='*'){
+            if (p.charAt(j) != '*') {
                 return false;
             }
         }
         return true;
     }
 
-    public static int function(int i, int j, String s, String p, int[][] dp) {
+    public static int isMatch(String s, String p) {
+        int n = s.length();
+        int m = p.length();
 
-        //Base case
+        int[] prev = new int[m + 1];
+        int[] curr = new int[m + 1];
 
-        //if both gets exhausted
-        if (i < 0 && j < 0) {
-            return 1;
+        // Base case: empty string & empty pattern
+        prev[0] = 1;
+
+        // Pattern matches empty string only if all '*'
+        for (int j = 1; j <= m; j++) {
+            prev[j] = isAllStars(p, j - 1) ? 1 : 0;
         }
 
-        //if i gets exhausted
-        if (i < 0 && j >= 0) {
-            return 0;
-        }
+        for (int i = 1; i <= n; i++) {
+            curr[0] = 0; // non-empty string can't match empty pattern
 
-        //if j gets exhausted
-        if (j < 0 && i >= 0) {
-            return isAllStars(s,i) ? 1:0;
-        }
+            for (int j = 1; j <= m; j++) {
 
-
-        if (dp[i][j]!=-1) return dp[i][j];
-
-        if (s.charAt(i) == p.charAt(j) && s.charAt(i) == '?') {
-            return dp[i][j] = function(i-1,j-1,s,p,dp);
-        }
-        else{
-            if (s.charAt(i) == '*') {
-                return dp[i][j] = (function(i - 1, j, s, p,dp) ==1 || function(i, j - 1, s, p,dp) == 1) ? 1:0;
-            }else{
-                return 0;
+                // Match or '?'
+                if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?') {
+                    curr[j] = prev[j - 1];
+                }
+                // '*'
+                else if (p.charAt(j - 1) == '*') {
+                    curr[j] = (prev[j] == 1 || curr[j - 1] == 1) ? 1 : 0;
+                }
+                // No match
+                else {
+                    curr[j] = 0;
+                }
             }
 
+            // Move curr to prev
+            prev = curr.clone();
         }
 
-    }
-
-    public static int isMatch(String s, String p) {
-        int n = s.length(); int m = p.length();
-        int[][] dp = new int[n][m];
-        for(int[] row: dp) Arrays.fill(dp,-1);
-        return function(n-1,m-1,s,p,dp);
+        return prev[m];
     }
 
     public static void main(String[] args) {
@@ -60,14 +59,9 @@ public class WildCardMatching {
 
         while (t-- > 0) {
             String s = in.next();
-            String u = in.next();
+            String p = in.next();
 
-
-           if (isMatch(s,u)==1){
-               System.out.println("true");
-           }else{
-               System.out.println("false");
-           }
+            System.out.println(isMatch(s, p) == 1 ? "true" : "false");
         }
     }
 }
