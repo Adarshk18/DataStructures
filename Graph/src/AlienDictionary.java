@@ -38,16 +38,29 @@ public class AlienDictionary {
             String s2 = dict[i+1];
 
             int len = Math.min(s1.length(),s2.length());
+            boolean foundDiff = false;
 
             for (int j = 0; j < len; j++) {
                 if (s1.charAt(j)!=s2.charAt(j)){
                     adj.get(s1.charAt(j)-'a').add(s2.charAt(j)-'a');
+                    foundDiff = true;
                     break;
                 }
+            }
+
+            //edge case 1 : if all matching and the first one is larger than the second one \
+            if(!foundDiff && s1.length()>s2.length()){
+                return "";
             }
         }
 
         List<Integer> topoSortt = topoSort(K,adj);
+
+        //edge case 2 : if it contains cycle
+        if(topoSortt.size() < K){
+            return "";
+        }
+
         StringBuilder ans = new StringBuilder();
         for (int it : topoSortt) {
             ans.append((char) (it + 'a'));
