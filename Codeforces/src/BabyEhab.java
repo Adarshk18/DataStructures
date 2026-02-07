@@ -17,8 +17,31 @@ public class BabyEhab {
             return;
         }
 
+        while(true){
+            boolean allEven = true;
+            for (int i = 0; i < n; i++) {
+                if (arr[i]%2==1){
+                    allEven = false;
+                    break;
+                }
+            }
+            if (!allEven){
+                break;
+            }
+
+            for (int i = 0; i < n; i++) {
+                arr[i]/=2;
+            }
+            sum /= 2;
+        }
+
+        if (sum % 2 == 1){
+            System.out.println(0);
+            return;
+        }
+
         for (int i = 0; i < n; i++) {
-            if ((sum - arr[i])%2==1){
+            if (arr[i]%2==1){
                 System.out.println(1);
                 System.out.println(i+1);
                 return;
