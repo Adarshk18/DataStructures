@@ -20,7 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/Strings/Strings.iml" filepath="$PROJECT_DIR$/Strings/Strings.iml" />
       <module fileurl="file://$PROJECT_DIR$/DSA_COMPLETE/Strings/Strings2.iml" filepath="$PROJECT_DIR$/DSA_COMPLETE/Strings/Strings2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tree/Tree.iml" filepath="$PROJECT_DIR$/Tree/Tree.iml" />
-      <module fileurl="file://$PROJECT_DIR$/codeforces/codeforces.iml" filepath="$PROJECT_DIR$/codeforces/codeforces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Codeforces/codeforces.iml" filepath="$PROJECT_DIR$/Codeforces/codeforces.iml" />
     </modules>
   </component>
 </project>

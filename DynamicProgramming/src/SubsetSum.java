@@ -3,12 +3,8 @@ import java.util.*;
 public class SubsetSum {
     public static boolean subsetSumToK(int n, int k, int[] arr) {
         boolean[] prev = new boolean[k + 1];
-
-
-        prev[0] = true;
-
-
-        if (arr[0] <= k) {
+      prev[0] = true;
+      if (arr[0] <= k) {
             prev[arr[0]] = true;
         }
 
