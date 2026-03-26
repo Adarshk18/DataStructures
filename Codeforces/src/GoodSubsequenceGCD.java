@@ -40,7 +40,6 @@ public class GoodSubsequenceGCD {
             }
             // If size < 2, we can't form a proper subset, so NO
         }
-
         return yesCount;
     }
 
